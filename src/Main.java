@@ -60,13 +60,99 @@ public class Main {
 
     public static int[][] movimientoAlfil(int fila, int columna) {
         int[][] tablero = new int[8][8];
+
+      /*Desplazamientos horizontales y verticales del alfil a partir de una coordenada cualquiera
+      (1, 1) -> avanza hacia la diagonal superior derecha
+      (1, -1) -> avanza hacia la diagonal inferior derecha
+      (-1, 1) -> avanza hacia la diagonal superior izquierda
+      (-1, -1) -> avanza hacia la diagonal inferior izquierda
+      */
+      // Estas posibles direcciones "unitarias" se incluyen en los arrays auxiliares de moviento en cada eje del tablero
+      int[] despHor = {1, 1, -1, -1};
+      int[] despVert = {1, -1, 1, -1};
+
+      for (int i = 0; i < 4 ; i++) {
+          int nuevaPosHor = fila + despHor[i];
+          int nuevaPosVert = columna + despVert[i] ;
+          while (((nuevaPosHor >= 0) && (nuevaPosHor < tablero.length)) &&
+              ((nuevaPosVert >= 0) && (nuevaPosVert < tablero.length))) {
+            tablero[nuevaPosHor][nuevaPosVert] = 1;
+            nuevaPosHor += despHor[i];
+            nuevaPosVert += despVert[i];
+
+        }
+
+      }
+      imprimirMatriz(tablero);
         return tablero;
     }
 
     public static int[][] movimientoTorre(int fila, int columna) {
-        int[][] tablero = new int[8][8];
+      int[][] tablero = new int[8][8];
+
+      int[] despHor = {0, 0, 1, -1};
+      int[] despVert = {1, -1, 0 , 0};
+
+      for (int i = 0; i < 4; i++) {
+        int nuevaPosHor = fila + despHor[i];
+        int nuevaPosVert =  columna + despVert[i];
+        while (((nuevaPosHor >= 0) && (nuevaPosHor < tablero.length)) &&
+            ((nuevaPosVert >= 0) && (nuevaPosVert < tablero[0].length))) {
+          tablero[nuevaPosHor][nuevaPosVert] = 1;
+          nuevaPosHor += despHor[i];
+          nuevaPosVert += despVert[i];
+        }
+      }
+
+      imprimirMatriz(tablero);
         return tablero;
     }
+
+
+  public static int[][] movimientoReina(int fila, int columna) {
+    int[][] tablero = new int[8][8];
+
+    int[] despHor = {0, 0, 1, -1, 1, 1, -1, -1};
+    int[] despVert = {1, -1, 0 , 0, 1, -1, 1, -1};
+
+    for (int i = 0; i < 8; i++) {
+      int nuevaPosHor = fila + despHor[i];
+      int nuevaPosVert =  columna + despVert[i];
+      while (((nuevaPosHor >= 0) && (nuevaPosHor < tablero.length)) &&
+          ((nuevaPosVert >= 0) && (nuevaPosVert < tablero[0].length))) {
+        tablero[nuevaPosHor][nuevaPosVert] = 1;
+        nuevaPosHor += despHor[i];
+        nuevaPosVert += despVert[i];
+      }
+    }
+
+    imprimirMatriz(tablero);
+    return tablero;
+  }
+
+  public static int[][] movimientoRey(int fila, int columna) {
+    int[][] tablero = new int[8][8];
+
+    int[] despHor = {0, 0, 1, -1, 1, 1, -1, -1};
+    int[] despVert = {1, -1, 0 , 0, 1, -1, 1, -1};
+
+    for (int i = 0; i < 8; i++) {
+      int nuevaPosHor = fila + despHor[i];
+      int nuevaPosVert =  columna + despVert[i];
+      if (((nuevaPosHor >= 0) && (nuevaPosHor < tablero.length)) &&
+          ((nuevaPosVert >= 0) && (nuevaPosVert < tablero[0].length))) {
+        tablero[nuevaPosHor][nuevaPosVert] = 1;
+      }
+    }
+
+    imprimirMatriz(tablero);
+    return tablero;
+  }
+
+
+
+
+
 
     public static void imprimirMatriz(int [][] matriz) {
       for (int i = 0; i < matriz.length; i++) {
